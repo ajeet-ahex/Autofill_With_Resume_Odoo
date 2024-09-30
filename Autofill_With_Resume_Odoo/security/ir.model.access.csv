@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_entity_extraction_openai_key,entity.extractionopenai,Entity_Extraction.model_ai_openai_key,,1,1,1,1
+access_entity_extraction_wizard,entity.wizard,Entity_Extraction.model_hr_applicant_extra_info_wizard,,1,1,1,1
+
+access_auto_fill,auto.fill,Entity_Extraction.model_auto_fill_resume,,1,1,1,1
+
+
+
+

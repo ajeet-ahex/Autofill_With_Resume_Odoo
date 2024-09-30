@@ -1,0 +1,340 @@
+<odoo>
+    <record id="view_hr_applicant_extra_info_wizard" model="ir.ui.view">
+        <field name="name">hr.applicant.extra.info.wizard.form</field>
+        <field name="model">hr.applicant.extra.info.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Extra Information">
+                <!-- <group>
+                    <group>
+                        <field name="resume_linkedin_val"/>
+                    </group>
+                <group>
+                    <field name="resume_linkedin" nolabel="1"/>
+                    <field name="resume_github"/>
+                    <field name="resume_loc"/>
+                    <field name="resume_exp"/>
+                    <field name="resume_degree"/>
+                    <field name="resume_certificates"/>
+                </group>
+                
+            </group> -->
+            <sheet>
+                <div class="row" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="col-6" style="display: flex; align-items: center;">
+                        <span>Basic Information: 
+                            
+                        <field name='basic' string="Basic Information" invisible="False" style="margin-right: 20px;"/></span>
+                        <!-- <button name="toggle_is_basic"
+                                type="object"
+                                class="oe_highlight"
+                                string="Get Basic Info"
+                                style="margin-left: 10px;"
+                        /> -->
+                    </div>
+                
+                    <div class="col-6" style="display: flex; align-items: center;">
+                        <span>Extra Information: 
+                        <field name='extra_all' string="Extra Information" invisible="False" style="margin-right: 10px;"/></span>
+                        <!-- <button name="toggle_is_extra"
+                                type="object"
+                                class="oe_highlight"
+                                string="Get Extra Info"
+                                style="margin-left: 10px;"
+                        /> -->
+                    </div>
+                </div>
+                
+                
+                <div class="oe_form_field">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <!-- Table Header -->
+                        <thead>
+                            <tr invisible="basic == False or extra_all == False">
+                            <!-- <tr > -->
+                                <!-- <th style="padding: 10px;" class="o_form_label">
+                                    <field name="select_all"/>
+                                </th> -->
+                                <th style="padding: 10px; font-weight: bold;" class="o_form_label">
+                                    Field
+                                </th>
+                                
+                                <th style="padding: 10px; font-weight: bold;" class="o_form_label">
+                                    Values
+                                </th>
+                                
+                                <th style="padding: 10px; font-weight: bold;" class="o_form_label">
+                                    <field name="select_all"/> Select 
+                                     <!-- Enable -->
+                                </th>
+                                
+                                
+                            </tr>
+
+                        </thead>
+                        <tr style="border-bottom: 2px solid black;"></tr>
+                        <!-- Table Body -->
+                        <tbody>
+                            <!-- <tr invisible="basic == False"> -->
+                            <!-- <tr/> -->
+                            <tr invisible="basic == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Name</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_name_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_name" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="basic == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Email</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_email_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_email" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="basic == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Phone</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_phone_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_phone" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">LinkedIn Profile</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_linkedin_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_linkedin" nolabel="1"/>
+                                </td>
+                            </tr >
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">GitHub Profile</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_github_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_github" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Location</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_loc_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_loc" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Experience</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_exp_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_exp" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Degree</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_degree_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_degree" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Certificates</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_certificates_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_certificates" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Known Languages</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_known_languages_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_known_languages" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Achievements</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_achievements_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_achievements" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Project Names</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_project_names_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_project_names" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Hobbies</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_hobbies_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_hobbies" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Strength</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_strength_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_strength" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Gender</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_gender_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_gender" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Date Of Birth</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_dob_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_dob" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Nationality</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_nationality_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_nationality" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Soft Skills</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_soft_skill_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_soft_skill" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Marital Status</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_marital_status_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_marital_status" nolabel="1"/>
+                                </td>
+                            </tr>
+                            <tr invisible="extra_all == False">
+                            <!-- <tr> -->
+                                <td style="padding: 10px;">
+                                    <span class="o_form_label">Weakness</span>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_Weakness_val"/>
+                                </td>
+                                <td style="padding: 10px;">
+                                    <field name="resume_Weakness" nolabel="1"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </sheet>
+            
+            
+            
+                <footer>
+                    <button string="Create" type="object" name="apply_changes" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!-- <record id="action_hr_applicant_extra_info_wizard" model="ir.actions.act_window">
+        <field name="name">Extra Info Wizard</field>
+        <field name="res_model">hr.applicant.extra.info.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record> -->
+    
+</odoo>
