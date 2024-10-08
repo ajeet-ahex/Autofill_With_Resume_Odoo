@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        
-        <!-- Define the action linked to the AI Setup menu item -->
+        <record id="view_forms_action_open_ai_key" model="ir.ui.view">
+            <field name="name">OpenAI API Key</field>
+            <field name="model">ai.openai.key</field>
+            <field name="arch" type="xml">
+                <form string="OpenAI API Key">
+                    <div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
+                        <group style="width: 50%; max-width: 600px; margin: 0 auto;">
+                            <separator string="Provide the OpenAI API key here"/>
+                            <field name="open_ai_key"/>
+                            <div style="width: 415%;">
+                                Do not have OpenAI API Key
+                                <a href="https://platform.openai.com/api-keys" target="_blank">click here</a>.
+                            </div>
+                        </group>
+                    </div>
+                </form>
+            </field>
+        </record>
         <record id="action_open_ai_keys" model="ir.actions.act_window">
             <field name="name">Open AI API Keys</field>
             <field name="res_model">ai.openai.key</field>
@@ -13,41 +29,11 @@
                 </p>
             </field>
         </record>
-
-        <!-- Inherit the existing menu (e.g., from the 'hr' module) -->
         <record id="action_open_ai_keys_menu_roots" model="ir.ui.menu">
             <field name="name">OpenAI API keys</field>
-            <!-- <field name="parent_id" ref="hr.menu_hr_recruitment_root"/>  -->
-            <field name="parent_id" ref="hr_recruitment.menu_hr_recruitment_configuration"/> 
-            <field name="sequence" eval="100"/> <!-- Adjust the sequence as needed -->
-            <field name="action" ref="action_open_ai_keys"/> <!-- Link to the action -->
+            <field name="parent_id" ref="hr_recruitment.menu_hr_recruitment_configuration"/>
+            <field name="sequence" eval="100"/>
+            <field name="action" ref="action_open_ai_keys"/>
         </record>
-
-
-        <!-- Define a form view for the ai.setup model -->
-        <record id="view_forms_action_open_ai_key" model="ir.ui.view">
-            <field name="name">ai.openai.key.form</field>
-            <field name="model">ai.openai.key</field>
-            <field name="arch" type="xml">
-                <form string="OpenAI API Key">
-                <div style="display: flex; justify-content: center; align-items: center; min-height: 70vh;">
-                    <group style="width: 50%; max-width: 600px; margin: 0 auto;">
-                    <separator string="Provide the OpenAI API key here" />
-                        <field name="open_ai_key"/>
-                        <!-- Add the URL as a clickable link below the field -->
-                        
-                    
-                    <div style="width: 415%;" >
-                        Do not have OpenAI API Key 
-                        <a href="https://platform.openai.com/api-keys" target="_blank"> click here</a>.
-                    </div>
-                </group>
-                </div>
-                
-                </form>
-            </field>
-        </record>
-
-
     </data>
 </odoo>

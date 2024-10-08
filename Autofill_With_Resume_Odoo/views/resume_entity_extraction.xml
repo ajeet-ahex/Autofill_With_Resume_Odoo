@@ -1,181 +1,160 @@
 <?xml version="1.0"?>
 <odoo>
     <data>
-
-        <!-- Form view customization (button can now reference the defined action) -->
         <record model="ir.ui.view" id="entity_extract_form">
             <field name="name">hr.applicant.form.custom.entity.extraction</field>
             <field name="model">hr.applicant</field>
             <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
-            <field name="arch" type="xml">    
-                
+            <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_makeMeeting']" position="before">
-                    
-                    <div style='position: relative;right: 10px;' >
-                        <button name="action_add_extra_info" type="object" string="Fetch Extra Information"  
-                            class="btn btn-primary" 
-                            style="margin-top: 70px; width: 173px;"/>
-                            <!-- <field name="fetch_info" widget="selection"/> -->
-                        <!-- <select  
-                                
-                            >
-                        
-                            <option value="action_add_basic_info">Get Basic Information</option>
-                            <option value="action_add_extra_info">Get Extra Information</option>
-                        </select> -->
+                    <div class="o_dropdown dropdown oe_stat_button btn position-relative p-0 border-0 o-dropdown--no-caret o-form-buttonbox .oe_stat_button.dropdown"
+                         style="position: relative; display: inline-block; ">
+                        <span class="o_dropdown_trigger"
+                              style="cursor: pointer; padding: 9px; background-color: #white; color: #000000c9; border-radius: 5px; border: 1px solid #0000001a; width: 100%; height: 100%;">
+                            Fetch Details
+                        </span>
+                        <div class="o_dropdown_menu justify-content-center align-items-center"
+                             style="display: none; position: absolute; background-color: white; min-width: 120px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1; ">
+                            <ul style="list-style: none; margin: 0; padding: 0; ">
+                                <li style="padding: 0px 5px; cursor: pointer;">
+                                    <button name="action_add_basic_info"
+                                            type="object"
+                                            string="Basic Info"
+                                            context="{'basic': True, 'extra_all': False}"
+                                            class="btn" style="background-color: transparent; border: none;"/>
+                                </li>
+                                <li style="padding: 0px 5px; cursor: pointer;">
+                                    <button name="action_add_extra_info"
+                                            type="object"
+                                            string="Extra Info"
+                                            context="{'basic': False, 'extra_all': True}"
+                                            class="btn" style="background-color: transparent; border: none;"/>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <!-- <div class="row" style="margin-top: 10px;">
-                        <div class="col-6">
-                            <field name="fetch_info" widget="selection" options="{'no_open': True}" class="form-control btn-primary"/>
-                        </div>
-                        <div class="col-6">
-                            <button name="action_fetch_info" type="object" class="btn btn-secondary">Submit</button>
-                        </div>
-                    </div>
-                    <div class="o_row">
-                        <div class="o_col">
-                            <label for="fetch_info">Select Information</label>
-                        </div>
-                    </div> -->
-                
+                    <script>
+                        $(document).ready(function() {
+                        $('.o_dropdown_trigger').on('click', function() {
+                        $('.o_dropdown_menu').toggle();
+                        });
 
+                        $(document).on('click', function(e) {
+                        if (!$(e.target).closest('.o_dropdown').length) {
+                        $('.o_dropdown_menu').hide();
+                        }
+                        });
+
+                        $('.o_dropdown_menu a[data-open]').on('click', function(e) {
+                        e.preventDefault();
+                        var actionMethod = $(this).data('open');
+                        if (actionMethod) {
+                        rpc.query({
+                        model: 'your.model',
+                        method: actionMethod,
+                        args: [],
+                        }).then(function(result) {
+                        console.log('Action executed:', result);
+                        });
+                        }
+                        });
+                        });
+                    </script>
                 </xpath>
-                
-                <!-- <xpath expr="//div[@class='oe_title pe-0']" position="before">
-                                          
-                        <div > 
-                            <span style="display: block; margin-bottom: 10px; font-weight: bold;">
-                               Get Digitalize Resume Info :
-                            
-                            <button name="action_refresh_page" type="object" string="Click Here" 
-                                 id="resume_refresh_button" 
-                                /></span>
-                        </div>
-                    
-                </xpath> -->
-
-                
                 <!-- Adding Github profile field after LinkedIn -->
                 <xpath expr="//field[@name='name']" position="replace">
-                    <!-- <group>
-                        Group for the name field
-                        <field name="name" />
-                    </group> -->
                     <div style="display: flex; width: 50%;">
-                        
                         <div style="flex: 1;">
                             <field name="name"/>
                         </div>
-                    <!-- <group>  -->
-                        <!-- Group for the button -->
-                        <!-- <div style="height: 50px;position: relative;right: -211px; width:50px">
-                            <button name="action_add_extra_info" type="object" string="Fetch Extra Information"  
-                                class="btn btn-primary" 
-                                style="margin-top: 70px; width: 173px;"/>
-                        </div> -->
-                    <!-- </group> -->
-                     </div>
+                    </div>
                 </xpath>
-                
                 <xpath expr="//field[@name='linkedin_profile']" position="after">
-                    <field name="resume_github" widget="url" placeholder="Github" readonly="False" invisible="show_resume_github == False"/>
-                    <field name="show_resume_github" invisible='True' />
+                    <field name="resume_github" widget="url" placeholder="Github" readonly="False"
+                           invisible="show_resume_github == False"/>
+                    <field name="show_resume_github" invisible='True'/>
                 </xpath>
-                
-
-                <!-- Making type_id field invisible -->
                 <xpath expr="//field[@name='type_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
-
-                <!-- Replacing phone, name, and email fields with custom fields -->
                 <xpath expr="//field[@name='partner_phone']" position="replace">
-                    <!-- <field name="resume_phone" placeholder="Phone" widget="phone" readonly="False" /> -->
-                    <field name="resume_phone" placeholder="Phone" widget="phone" readonly="False" invisible="show_resume_phone == False"/> 
-                     <field name="show_resume_phone" invisible='True'/>
+                    <field name="resume_phone" placeholder="Phone" widget="phone" readonly="False"
+                           invisible="show_resume_phone == False"/>
+                    <field name="show_resume_phone" invisible='True'/>
                 </xpath>
                 <xpath expr="//label[@for='partner_name']" position="replace">
                     <label for="resume_name" string="Applicant's Name :  "/>
-                    
                 </xpath>
                 <xpath expr="//field[@name='partner_name']" position="replace">
                     <field name="resume_name" placeholder="Name" widget="Char" readonly="False"/>
-                    <!-- <field name="resume_name" placeholder="resume name" widget="name" readonly="False" invisible="show_resume_name == False"/> 
-                     <field name="show_resume_name" invisible='True'/> -->
                 </xpath>
                 <xpath expr="//field[@name='email_from']" position="replace">
-                    <!-- <field name="resume_email" widget="email" readonly="False"/> -->
-                    <field name="resume_email" placeholder="resume email" widget="email" readonly="False" invisible="show_resume_email == False"/> 
-                     <field name="show_resume_email" invisible='True'/>
+                    <field name="resume_email" placeholder="resume email" widget="email" readonly="False"
+                           invisible="show_resume_email == False"/>
+                    <field name="show_resume_email" invisible='True'/>
                 </xpath>
                 <xpath expr="//field[@name='linkedin_profile']" position="replace">
-                    <field name="resume_linkedin" placeholder="LinkedIn Profile" widget="url" readonly="False" invisible="show_resume_linkedin == False"/>
+                    <field name="resume_linkedin" placeholder="LinkedIn Profile" widget="url" readonly="False"
+                           invisible="show_resume_linkedin == False"/>
                     <field name="show_resume_linkedin" invisible='True'/>
-                    <!-- <field name="resume_phone" placeholder="Phone" widget="text" readonly="False" invisible="show_resume_phone == False"/>
-                    <field name="show_resume_phone" invisible='True'/> -->
-                    <field name="resume_degree" widget="text" placeholder="Degree" readonly="False" invisible="show_resume_degree == False"/>
+                    <field name="resume_degree" widget="text" placeholder="Degree" readonly="False"
+                           invisible="show_resume_degree == False"/>
                     <field name="show_resume_degree" invisible='True'/>
-                    <field name="resume_exp" widget="text" placeholder="Experience" readonly="False" invisible="show_resume_exp == False"/>
+                    <field name="resume_exp" widget="text" placeholder="Experience" readonly="False"
+                           invisible="show_resume_exp == False"/>
                     <field name="show_resume_exp" invisible='True'/>
-                    <field name="resume_loc" widget="text" placeholder="Location" readonly="False" invisible="show_resume_loc == False"/>
+                    <field name="resume_loc" widget="text" placeholder="Location" readonly="False"
+                           invisible="show_resume_loc == False"/>
                     <field name="show_resume_loc" invisible='True'/>
-                    <field name="resume_certificates" widget="text" placeholder="Certificats" readonly="False" invisible="show_resume_certificates == False"/>
+                    <field name="resume_certificates" widget="text" placeholder="Certificats" readonly="False"
+                           invisible="show_resume_certificates == False"/>
                     <field name="show_resume_certificates" invisible='True'/>
-                    <field name="resume_known_languages" widget="text" placeholder="Know Languages" readonly="False" invisible="show_resume_known_languages == False"/>
+                    <field name="resume_known_languages" widget="text" placeholder="Know Languages" readonly="False"
+                           invisible="show_resume_known_languages == False"/>
                     <field name="show_resume_known_languages" invisible='True'/>
-                    <field name="resume_achievements" widget="text" placeholder="Achievements" readonly="False" invisible="show_resume_achievements == False"/>
+                    <field name="resume_achievements" widget="text" placeholder="Achievements" readonly="False"
+                           invisible="show_resume_achievements == False"/>
                     <field name="show_resume_achievements" invisible='True'/>
-                    <field name="resume_project_names" widget="text" placeholder="Project Names" readonly="False" invisible="show_resume_project_names == False"/>
+                    <field name="resume_project_names" widget="text" placeholder="Project Names" readonly="False"
+                           invisible="show_resume_project_names == False"/>
                     <field name="show_resume_project_names" invisible='True'/>
-                    <field name="resume_hobbies" widget="text" placeholder="Hobbies" readonly="False" invisible="show_resume_hobbies == False"/>
+                    <field name="resume_hobbies" widget="text" placeholder="Hobbies" readonly="False"
+                           invisible="show_resume_hobbies == False"/>
                     <field name="show_resume_hobbies" invisible='True'/>
-                    <field name="resume_strength" widget="text" placeholder="Strength" readonly="False" invisible="show_resume_strength == False"/>
+                    <field name="resume_strength" widget="text" placeholder="Strength" readonly="False"
+                           invisible="show_resume_strength == False"/>
                     <field name="show_resume_strength" invisible='True'/>
-                    <field name="resume_dob" widget="text" placeholder="Date Of Birth" readonly="False" invisible="show_resume_dob == False"/>
+                    <field name="resume_dob" widget="text" placeholder="Date Of Birth" readonly="False"
+                           invisible="show_resume_dob == False"/>
                     <field name="show_resume_dob" invisible='True'/>
-                    <field name="resume_gender" widget="text" placeholder="Gender" readonly="False" invisible="show_resume_gender == False"/>
+                    <field name="resume_gender" widget="text" placeholder="Gender" readonly="False"
+                           invisible="show_resume_gender == False"/>
                     <field name="show_resume_gender" invisible='True'/>
-                    <field name="resume_nationality" widget="text" placeholder="Nationalities" readonly="False" invisible="show_resume_nationality == False"/>
+                    <field name="resume_nationality" widget="text" placeholder="Nationalities" readonly="False"
+                           invisible="show_resume_nationality == False"/>
                     <field name="show_resume_nationality" invisible='True'/>
-                    <field name="resume_soft_skill" widget="text" placeholder="Soft Skills" readonly="False" invisible="show_resume_soft_skill == False"/>
+                    <field name="resume_soft_skill" widget="text" placeholder="Soft Skills" readonly="False"
+                           invisible="show_resume_soft_skill == False"/>
                     <field name="show_resume_soft_skill" invisible='True'/>
-                    <field name="resume_marital_status" widget="text" placeholder="Matital Status" readonly="False" invisible="show_resume_marital_status == False"/>
+                    <field name="resume_marital_status" widget="text" placeholder="Matital Status" readonly="False"
+                           invisible="show_resume_marital_status == False"/>
                     <field name="show_resume_marital_status" invisible='True'/>
-                    <field name="resume_Weakness" widget="text" placeholder="Weakness" readonly="False" invisible="show_resume_Weakness == False"/>
+                    <field name="resume_Weakness" widget="text" placeholder="Weakness" readonly="False"
+                           invisible="show_resume_Weakness == False"/>
                     <field name="show_resume_Weakness" invisible='True'/>
                 </xpath>
-                
-                
             </field>
         </record>
-        <!-- <template id="assets_backend" inherit_id="web.assets_backend" name="Reload Page on Attachment Upload">
-            <xpath expr="." position="inside">
-                <script type="text/javascript">
-                    odoo.define('Entity_Extraction.reload_page', function (require) {
-                        "use strict";
-                        var core = require('web.core');
-                        var rpc = require('web.rpc');
-    
-                        core.bus.on('attachment_uploaded', this, function () {
-                            window.location.reload();
-                        });
-                    });
-                </script>
-            </xpath>
-        </template> -->
-        
         <record id="custom_hr_kanban_view_applicant_entity_extraction" model="ir.ui.view">
             <field name="name">hr.applicant.kanban.view.custom.entity.extraction</field>
             <field name="model">hr.applicant</field>
-            <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant" />
+            <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='name']" position="replace">
                     <field name='resume_name'/>
                 </xpath>
- 
-
             </field>
-        </record> 
-        
+        </record>
+
     </data>
 </odoo>
