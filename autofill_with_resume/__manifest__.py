@@ -10,6 +10,9 @@
     AutoFill With Resume
     """,
     'depends': ['base', 'web', 'website', 'hr_recruitment'],
+    'images': [
+        'static/description/banner.png',
+        ],
     'data': [
 
         'security/ir.model.access.csv',
