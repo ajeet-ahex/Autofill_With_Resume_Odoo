@@ -2,7 +2,7 @@
     'name': 'AutoFill With Resume',
     'version': '17.0.0.1',
     'category': 'Project',
-    'author': 'Ahex',
+    'author': 'Ahex Technologies',
     'summary': 'AutoFill With Resume',
     'website': '',
     'sequence': '10',
